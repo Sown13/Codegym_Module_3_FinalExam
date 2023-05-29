@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hải Sơn
@@ -23,7 +24,7 @@
         <th>Department</th>
         <th>Action</th>
     </tr>
-    <c:forEach var="resultEmployee" items="${requestScope.employeeList}">
+    <c:forEach var="resultEmployee" items="${requestScope['employeeList']}">
         <tr>
             <th>${resultEmployee.getEmployee_id()}</th>
             <th>${resultEmployee.name}</th>
