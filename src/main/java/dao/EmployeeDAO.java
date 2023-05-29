@@ -107,4 +107,28 @@ public class EmployeeDAO {
             printSQLException(ex);
         }
     }
+
+    public List<Employee> searchEmployee(String searchKey){
+        String SELECT_EMPLOYEE_BY_ID = "SELECT*FROM employee LEFT JOIN department USING(department_id) WHERE name like ?;";
+        List<Employee> employeeList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_BY_ID)){
+            preparedStatement.setString(1, "%"+ searchKey + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int employee_id = resultSet.getInt("employee_id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                String phoneNumber = resultSet.getString("phone_number");
+                double salary = resultSet.getDouble("salary");
+                String department_id = resultSet.getString("department_name");
+                employeeList.add(new Employee(employee_id,name,email,address,phoneNumber,salary,department_id));
+            }
+        }
+        catch (SQLException ex){
+            printSQLException(ex);
+        }
+        return employeeList;
+    }
 }

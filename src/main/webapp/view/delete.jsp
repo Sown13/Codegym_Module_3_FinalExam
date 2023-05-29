@@ -13,10 +13,12 @@
 <body>
 <h1> Xóa </h1>
 <form action="home" method="post">
+    <input type="hidden" name="employee_id" value="${requestScope.employee_id}">
     <input type="hidden" name="choice" value="delete">
     <input type="submit" value="Xóa">
 </form>
 <form action="home" method="get">
+    <input type="hidden" name="employee_id" value="${requestScope.employee_id}">
     <input type="hidden" name="choice" value="">
     <input type="submit" value="Không">
 </form>

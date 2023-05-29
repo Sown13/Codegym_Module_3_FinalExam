@@ -1,23 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hải Sơn
   Date: 5/29/2023
-  Time: 9:19 AM
+  Time: 10:54 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1> Trang chủ </h1>
-<form action="home" method="get">
-    <input type="hidden" name="choice" value="create">
-    <input type="submit" value="Thêm">
-</form>
+<h1> Kết quả tìm kiếm </h1>
 <table>
     <tr>
         <th>#</th>
@@ -43,10 +37,5 @@
         </tr>
     </c:forEach>
 </table>
-
-<form action="home" method="get">
-    <input type="text" name="searchKey" placeholder="search here">
-    <input type="submit" name="choice" value="search">
-</form>
 </body>
 </html>

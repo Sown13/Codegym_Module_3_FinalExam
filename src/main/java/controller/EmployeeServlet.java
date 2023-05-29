@@ -38,6 +38,8 @@ public class EmployeeServlet extends HttpServlet {
                 case "delete":
                     showDeleteForm(request, response);
                     break;
+                case "search":
+                    showSearchResult(request, response);
                 default:
                     getEmployeeList(request, response);
                     break;
@@ -123,4 +125,17 @@ public class EmployeeServlet extends HttpServlet {
         String employee_id = request.getParameter("employee_id");
         employeeDAO.deleteEmployee(employee_id);
     }
+
+    private void showSearchResult(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String searchKey = request.getParameter("searchKey");
+        List<Employee> resultEmployeeList = employeeDAO.searchEmployee(searchKey);
+//        request.setAttribute("resultEmployeeList",resultEmployeeList);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("view/search_result.jsp");
+//        dispatcher.forward(request, response);
+        List<Employee> employeeList = employeeDAO.searchEmployee(searchKey);
+        request.setAttribute("employeeList",employeeList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/search_result.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }
