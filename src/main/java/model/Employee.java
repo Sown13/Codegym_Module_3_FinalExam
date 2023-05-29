@@ -34,6 +34,15 @@ public class Employee {
         this.department = department;
     }
 
+    public Employee(String name, String email, String address, String phoneNumber, double salary, int department_id) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.department_id = department_id;
+    }
+
     public int getEmployee_id() {
         return employee_id;
     }

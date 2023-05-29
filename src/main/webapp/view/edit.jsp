@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<h1> Sửa </h1>
 <form action="home" method="post">
     <input type="hidden" name="choice" value="edit">
     <input type="hidden" name="employee_id" value="${requestScope.employee_id}">

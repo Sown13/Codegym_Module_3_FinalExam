@@ -64,6 +64,21 @@ public class EmployeeDAO {
         return employeeList;
     }
 
+    public void insertEmployee(Employee employee){
+        String INSERT_EMPLOYEE_SQL = "INSERT INTO employee VALUES (default,?,?,?,?,?,?);";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEE_SQL)){
+            preparedStatement.setString(1, employee.getName());
+            preparedStatement.setString(2, employee.getEmail());
+            preparedStatement.setString(3, employee.getAddress());
+            preparedStatement.setString(4, employee.getPhoneNumber());
+            preparedStatement.setDouble(5, employee.getSalary());
+            preparedStatement.setInt(6, employee.getDepartment_id());
+            preparedStatement.executeUpdate();
+        }catch (SQLException ex){
+            printSQLException(ex);
+        }
+    }
     public void updateEmployee(Employee employee){
         String UPDATE_EMPLOYEE_SQL = "UPDATE employee SET name=?,email=?,address=?,phone_number=?,salary=?,department_id=? WHERE employee_id = ?;";
         try (Connection connection = getConnection();
@@ -77,6 +92,18 @@ public class EmployeeDAO {
             preparedStatement.setInt(7, employee.getEmployee_id());
             preparedStatement.executeUpdate();
         }catch (SQLException ex){
+            printSQLException(ex);
+        }
+    }
+
+    public void deleteEmployee(String employee_id){
+        String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE employee_id = ?;";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE_SQL)){
+            preparedStatement.setString(1, employee_id);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException ex){
             printSQLException(ex);
         }
     }

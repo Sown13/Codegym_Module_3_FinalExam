@@ -52,12 +52,16 @@ public class EmployeeServlet extends HttpServlet {
         }
             switch (choice) {
                 case "create":
+                    createNewEmployee(request, response);
+                    getEmployeeList(request, response);
                     break;
                 case "edit":
                     updateEmployee(request, response);
                     getEmployeeList(request, response);
                     break;
                 case "delete":
+                    delete(request, response);
+                    getEmployeeList(request, response);
                     break;
                 default:
                     getEmployeeList(request, response);
@@ -85,8 +89,21 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String employee_id = request.getParameter("employee_id");
+        request.setAttribute("employee_id", employee_id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/delete.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void createNewEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String phoneNumber = request.getParameter("phone_number");
+        double salary = Double.parseDouble(request.getParameter("salary"));
+        int department_id = Integer.parseInt(request.getParameter("department_id"));
+        Employee employee = new Employee(name,email,address,phoneNumber,salary,department_id);
+        employeeDAO.insertEmployee(employee);
     }
 
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -102,4 +119,8 @@ public class EmployeeServlet extends HttpServlet {
         employeeDAO.updateEmployee(employee);
     }
 
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String employee_id = request.getParameter("employee_id");
+        employeeDAO.deleteEmployee(employee_id);
+    }
 }
